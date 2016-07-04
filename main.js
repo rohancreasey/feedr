@@ -10,7 +10,8 @@
   var container = document.querySelector('#container')
   var header = document.querySelector('header')
   var state = {
-       newsSources : ['newsSource0','newsSource1','newsSource2'],
+       newsSources : 
+        ['newsSource0rohan','newsSource1jess','newsSource2amy'],
   }
 
 
@@ -23,7 +24,17 @@
       `
   }
 
-// render nav bar
+
+function renderSource(source) {
+      return `
+        <a href="#">
+            ${source}
+        </a>
+  	   `
+}
+
+
+// render nav bar - 
 function renderNav(state, into) {
     into.innerHTML = `
     <section class="wrapper">
@@ -36,9 +47,9 @@ function renderNav(state, into) {
         <ul>
           <li><a href="#">News Source: <span>Source Name</span></a>
           <ul>
-            <li><a href="#">Source 1</a></li>
-            <li><a href="#">Source 2</a></li>
-            <li><a href="#">Source 3</a></li>
+            ${state.newsSources.map((source) => {
+                return `<li>${renderSource(source)}</li>`
+            }).join('')}
           </ul>
           </li>
         </ul>
@@ -47,6 +58,35 @@ function renderNav(state, into) {
     </section>
     `
 }
+
+
+
+// // render nav bar - ORIGINAL
+// function renderNav(state, into) {
+//     into.innerHTML = `
+//     <section class="wrapper">
+//       <a href="#"><h1>Feedr</h1></a>
+//       <nav>
+//         <section id="search">
+//           <input type="text" name="name" value="">
+//           <div id="search-icon"><img src="images/search.png" alt="" /></div>
+//         </section>
+//         <ul>
+//           <li><a href="#">News Source: <span>Source Name</span></a>
+//           <ul>
+//             <li><a href="#">${state.newsSources[0]}</a></li>
+//             <li><a href="#">${state.newsSources[1]}</a></li>
+//             <li><a href="#">${state.newsSources[2]}</a></li>
+//           </ul>
+//           </li>
+//         </ul>
+//       </nav>
+//       <div class="clearfix"></div>
+//     </section>
+//     `
+// }
+
+
 
 // render Article List - inside container
 function renderArticleList(state, into) {
