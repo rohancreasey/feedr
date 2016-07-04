@@ -48,11 +48,71 @@ function renderNav(state, into) {
     `
 }
 
-
+// render Article List - inside container
+function renderArticleList(state, into) {
+  into.innerHTML = `
+     <section id="main" class="wrapper">
+     MOO
+      <article class="article">
+        <section class="featured-image">
+          <img src="images/article_placeholder_1.jpg" alt="" />
+        </section>
+        <section class="article-content">
+          <a href="#"><h3>Test article title</h3></a>
+          <h6>Lifestyle</h6>
+        </section>
+        <section class="impressions">
+          526
+        </section>
+        <div class="clearfix"></div>
+      </article>
+      <article class="article">
+        <section class="featured-image">
+          <img src="images/article_placeholder_2.jpg" alt="" />
+        </section>
+        <section class="article-content">
+          <a href="#"><h3>Test article title</h3></a>
+          <h6>Lifestyle</h6>
+        </section>
+        <section class="impressions">
+          526
+        </section>
+        <div class="clearfix"></div>
+      </article>
+      <article class="article">
+        <section class="featured-image">
+          <img src="images/article_placeholder_2.jpg" alt="" />
+        </section>
+        <section class="article-content">
+          <a href="#"><h3>Test article title</h3></a>
+          <h6>Lifestyle</h6>
+        </section>
+        <section class="impressions">
+          526
+        </section>
+        <div class="clearfix"></div>
+      </article>
+      <article class="article">
+        <section class="featured-image">
+          <img src="images/article_placeholder_1.jpg" alt="" />
+        </section>
+        <section class="article-content">
+          <a href="#"><h3>Test article title</h3></a>
+          <h6>Lifestyle</h6>
+        </section>
+        <section class="impressions">
+          526
+        </section>
+        <div class="clearfix"></div>
+      </article>
+    </section>  
+  `
+}
 
 
 
   // renderLoading(state, container)
   renderNav(state, header)
+  renderArticleList(state, container)
 
 })()
