@@ -10,8 +10,12 @@
   var container = document.querySelector('#container')  // container div inside body
   var header = document.querySelector('header') // header 
   var state = {
-       newsSources : 
-        ['newsSource0rohan','newsSource1jess','newsSource2amy'],  // array of article sources
+       newsSources : [
+         {name: 'Reddit'},
+         {name: 'newsSource1rohan'},
+         {name: 'newsSource2amy'},
+         {test: 'testValue'}       
+        ],  // array of article sources
   }
 
 
@@ -25,10 +29,10 @@
   }
 
 
-function renderSource(source) {
+function renderNavItem(item) {
       return `
-        <a href="#">
-            ${source}
+        <a href="${item.name}">
+            ${item.name}
         </a>
   	   `
 }
@@ -49,8 +53,8 @@ function renderNav(state, into) {
         <ul>
           <li><a href="#">News Source: <span>Source Name</span></a>
           <ul>
-            ${state.newsSources.map((source) => {
-                return `<li>${renderSource(source)}</li>`
+            ${state.newsSources.map((item) => {
+                return `<li>${renderNavItem(item)}</li>`
             }).join('')}
           </ul>
           </li>
@@ -129,4 +133,18 @@ function renderArticleList(state, into) {
   renderNav(state, header)
   renderArticleList(state, container)
 
-})()
+// fetch keyword
+fetch('https://www.reddit.com/top.json')
+	.then(function(response) {
+		return response.json();
+  }).then(function(dataAsJson) {
+      console.log(dataAsJson);
+      //state.newsSources.push[0]
+    })
+
+// create a function for fetch action as want to repeat it
+
+
+
+
+})()  // }) closes function for scope and () calls function/page
