@@ -7,15 +7,15 @@
 
 (function() {
 
-  var container = document.querySelector('#container')
-  var header = document.querySelector('header')
+  var container = document.querySelector('#container')  // container div inside body
+  var header = document.querySelector('header') // header 
   var state = {
        newsSources : 
-        ['newsSource0rohan','newsSource1jess','newsSource2amy'],
+        ['newsSource0rohan','newsSource1jess','newsSource2amy'],  // array of article sources
   }
 
 
-// call loading pacman
+// renderLoading call for loading pacman
   function renderLoading(data, into) {
     // TODO: Add the template
       into.innerHTML = `        
@@ -33,8 +33,10 @@ function renderSource(source) {
   	   `
 }
 
-
-// render nav bar - 
+/* renderNav function to show nav bar
+   array.map function creates new array 
+   with results of calling renderSource() on every element in state.newsSources array
+*/
 function renderNav(state, into) {
     into.innerHTML = `
     <section class="wrapper">
@@ -60,35 +62,7 @@ function renderNav(state, into) {
 }
 
 
-
-// // render nav bar - ORIGINAL
-// function renderNav(state, into) {
-//     into.innerHTML = `
-//     <section class="wrapper">
-//       <a href="#"><h1>Feedr</h1></a>
-//       <nav>
-//         <section id="search">
-//           <input type="text" name="name" value="">
-//           <div id="search-icon"><img src="images/search.png" alt="" /></div>
-//         </section>
-//         <ul>
-//           <li><a href="#">News Source: <span>Source Name</span></a>
-//           <ul>
-//             <li><a href="#">${state.newsSources[0]}</a></li>
-//             <li><a href="#">${state.newsSources[1]}</a></li>
-//             <li><a href="#">${state.newsSources[2]}</a></li>
-//           </ul>
-//           </li>
-//         </ul>
-//       </nav>
-//       <div class="clearfix"></div>
-//     </section>
-//     `
-// }
-
-
-
-// render Article List - inside container
+// renderArticleList() to show list of articles, inside #container
 function renderArticleList(state, into) {
   into.innerHTML = `
      <section id="main" class="wrapper">
@@ -150,8 +124,8 @@ function renderArticleList(state, into) {
 }
 
 
-
-  // renderLoading(state, container)
+// call functions
+  renderLoading(state, container)
   renderNav(state, header)
   renderArticleList(state, container)
 
