@@ -11,11 +11,14 @@
   var header = document.querySelector('header') // header 
   var state = {
        newsSources : [
-         {name: 'Reddit'},
-         {name: 'newsSource1rohan'},
-         {name: 'newsSource2amy'},
-         {test: 'testValue'}       
-        ],  // array of article sources
+	        {
+            name: 'Reddit',
+            url: 'https://www.reddit.com/top.json'      
+          },
+          {name: 'newsSource1rohan'},
+          {name: 'newsSource2amy'},
+          {test: 'testValue'}       
+        ],    // array of article sources
   }
 
 
@@ -134,17 +137,27 @@ function renderArticleList(state, into) {
   renderArticleList(state, container)
 
 // fetch keyword
-fetch('https://www.reddit.com/top.json')
-	.then(function(response) {
-		return response.json();
-  }).then(function(dataAsJson) {
-      console.log(dataAsJson);
-      //state.newsSources.push[0]
-    })
+// fetch('https://www.reddit.com/top.json')
+// 	.then(function(response) {
+// 		return response.json();
+//   }).then(function(dataAsJson) {
+//       console.log(dataAsJson);
+//       //state.newsSources.push[0]
+//     })
 
 // create a function for fetch action as want to repeat it
 
+function fetchPosts(callback){
+		fetch(callback.url)   // fetch .url object of callback parameter
+      .then(function(response) {
+			  return response.json()
+		}).then(function(dataAsJson) {
+			  console.log(dataAsJson);
+		})
+	}
 
-
+fetchPosts(state.newsSources[]); // argument becomes the parameter callback in line 150
+                                  // so should reference newsSources array
+                                  // and callback is then = state.newsSources.array.url objects?
 
 })()  // }) closes function for scope and () calls function/page
