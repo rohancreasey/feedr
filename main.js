@@ -11,19 +11,20 @@
   var header = document.querySelector('header') // header 
   var state = {
        newsSources : [
-
-	        {
-            name: 'Reddit',
-            url: 'https://www.reddit.com/top.json'      
-          },
-          {
-            name: 'Mashable',
-            url: 'https://crossorigin.me/http://mashable.com/stories.json' 
-          },
-          {name: 'newsSource1rohan'},
-          {name: 'newsSource2amy'},
-          {test: 'testValue'}       
+            {
+              name: 'Reddit',
+              url: 'https://www.reddit.com/top.json'      
+            },
+            {
+              name: 'Mashable',
+              url: 'https://crossorigin.me/http://mashable.com/stories.json' 
+            },
+            {name: 'newsSource1rohan'},
+            {name: 'newsSource2amy'},
+            {test: 'testValue'}       
         ],    // array of article sources
+
+        articles : []
   }
 
 
@@ -50,9 +51,9 @@ function renderNavItem(item) {    // returns
    array.map function creates new array 
    with results of calling renderSource() on every element in state.newsSources array
 */
-function renderNav(state, into) {
+function renderNav(state, header) {
     //setting HTML of our into parameter (into is the html you're rendering into)
-    into.innerHTML = `
+    header.innerHTML = `
     <section class="wrapper">
       <a href="#"><h1>Feedr</h1></a>
       <nav>
@@ -78,71 +79,56 @@ function renderNav(state, into) {
 
 
 // renderArticleList() to show list of articles, inside #container
-function renderArticleList(state, into) {
+function renderArticleListContainer(state, into) {
   into.innerHTML = `
      <section id="main" class="wrapper">
      MOO
-      <article class="article">
-        <section class="featured-image">
-          <img src="images/article_placeholder_1.jpg" alt="" />
-        </section>
-        <section class="article-content">
-          <a href="#"><h3>Test article title</h3></a>
-          <h6>Lifestyle</h6>
-        </section>
-        <section class="impressions">
-          526
-        </section>
-        <div class="clearfix"></div>
-      </article>
-      <article class="article">
-        <section class="featured-image">
-          <img src="images/article_placeholder_2.jpg" alt="" />
-        </section>
-        <section class="article-content">
-          <a href="#"><h3>Test article title</h3></a>
-          <h6>Lifestyle</h6>
-        </section>
-        <section class="impressions">
-          526
-        </section>
-        <div class="clearfix"></div>
-      </article>
-      <article class="article">
-        <section class="featured-image">
-          <img src="images/article_placeholder_2.jpg" alt="" />
-        </section>
-        <section class="article-content">
-          <a href="#"><h3>Test article title</h3></a>
-          <h6>Lifestyle</h6>
-        </section>
-        <section class="impressions">
-          526
-        </section>
-        <div class="clearfix"></div>
-      </article>
-      <article class="article">
-        <section class="featured-image">
-          <img src="images/article_placeholder_1.jpg" alt="" />
-        </section>
-        <section class="article-content">
-          <a href="#"><h3>Test article title</h3></a>
-          <h6>Lifestyle</h6>
-        </section>
-        <section class="impressions">
-          526
-        </section>
-        <div class="clearfix"></div>
-      </article>
+            ${state.articles.map((article) => {
+                return renderArticle(article)
+            }).join('')}
+
     </section>  
   `
 }
 
+// function renderContainer (state, into){
+//         into.innerHTML = `
+//          <section id="main" class="wrapper">
+//      ${state.articles.map((article)=>{
+//          return renderContainerArticle(article)
+//      }).join('')}
+//    </section>
+//         `
+//  }
+
+function renderArticle(article) {
+    return(`
+        <article class="article">
+        <section class="featured-image">
+          <img src="images/article_placeholder_1.jpg" alt="" />
+        </section>
+        <section class="article-content">
+          <a href="#"><h3>${article.title}</h3></a>
+          <h6>Lifestyle</h6>
+        </section>
+        <section class="impressions">
+          526
+        </section>
+        <div class="clearfix"></div>
+      </article>
+      `
+    )
+  }
+
+
+
+
+
 
 // call functions
-  renderLoading(state, container)
-  renderNav(state, header)
-  renderArticleList(state, container)
+  // renderLoading(state, container);
+  renderNav(state, header);
+  renderArticleListContainer(state, container);
 
 // fetch keyword
 // fetch('https://www.reddit.com/top.json')
@@ -168,4 +154,59 @@ function renderArticleList(state, into) {
 //                                   // so should reference newsSources array
 //                                   // and callback is then = state.newsSources.array.url objects?
 
+
+//1. function and 
+// function fetchRedditData(){
+// 	  fetch('https://www.reddit.com/top.json')
+// 	    .then(function(response) {
+// 	      return response.json();
+// 	    }).then(function(dataAsJson) {
+// 	      result.data.children.forEach((item) => {
+// 	        console.log(item)
+// 	  })
+// 	})
+// }
+
+// fetchRedditData();
+
+// var article = []
+//     article.title = item.data.title,
+
+// Cut and put into where console logging:
+
+function fetchRedditData(){
+	  fetch('https://www.reddit.com/top.json')
+	    .then(function(response) {
+	      return response.json();
+	    }).then(function(dataAsJson) {
+        // loop through data
+        dataAsJson.data.children.forEach((item) => {
+	        var article = {}
+          article.title = item.data.title,
+          article.img = item.data.thumbnail
+          // article.url = item.data.
+          // article.impressions = item.data.
+          // article.category = item.data.
+          // article.description = item.data.
+
+          
+          // push to array
+          state.articles.push(article);
+	  })
+      renderArticleListContainer(state, container)
+	})
+
+}
+
+fetchRedditData();
+
+
+
+
 })()  // }) closes function for scope and () calls function/page
+
+
+
+
+// Listen for clicks on drop down
+// Fetch data based on what is clicked in drop down
