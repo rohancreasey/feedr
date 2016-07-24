@@ -228,8 +228,8 @@ fetchMashableData();
 
 
 
-})()  // }) closes function for scope and () calls function/page
-
+// }) closes function for scope and () calls function/page
+})() 
 
 
 
