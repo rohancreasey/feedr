@@ -52,7 +52,7 @@ function renderNavItem(item) {    // returns
    with results of calling renderSource() on every element in state.newsSources array
 */
 function renderNav(state, header) {
-    //setting HTML of our into parameter (into is the html you're rendering into)
+    //setting HTML of our into parameter (header is the html you're rendering into)
     header.innerHTML = `
     <section class="wrapper">
       <a href="#"><h1>Feedr</h1></a>
@@ -91,28 +91,19 @@ function renderArticleListContainer(state, into) {
   `
 }
 
-// function renderContainer (state, into){
-//         into.innerHTML = `
-//          <section id="main" class="wrapper">
-//      ${state.articles.map((article)=>{
-//          return renderContainerArticle(article)
-//      }).join('')}
-//    </section>
-//         `
-//  }
 
 function renderArticle(article) {
     return(`
         <article class="article">
         <section class="featured-image">
-          <img src="images/article_placeholder_1.jpg" alt="" />
+          <img src="${article.img}" alt="" target="_blank" />
         </section>
         <section class="article-content">
           <a href="#"><h3>${article.title}</h3></a>
           <h6>Lifestyle</h6>
         </section>
         <section class="impressions">
-          526
+          ${article.impressions}
         </section>
         <div class="clearfix"></div>
       </article>
@@ -126,7 +117,7 @@ function renderArticle(article) {
 
 
 // call functions
-  // renderLoading(state, container);
+  renderLoading(state, container);
   renderNav(state, header);
   renderArticleListContainer(state, container);
 
@@ -179,19 +170,19 @@ function fetchRedditData(){
 	    .then(function(response) {
 	      return response.json();
 	    }).then(function(dataAsJson) {
-        // loop through data
-        dataAsJson.data.children.forEach((item) => {
-	        var article = {}
-          article.title = item.data.title,
-          article.img = item.data.thumbnail
-          // article.url = item.data.
-          // article.impressions = item.data.
-          // article.category = item.data.
-          // article.description = item.data.
-
-          
-          // push to array
-          state.articles.push(article);
+          console.log(dataAsJson);
+          // loop through data
+          dataAsJson.data.children.forEach((item) => {
+	          var article = {}
+            article.title = item.data.title,
+            article.img = item.data.thumbnail
+            article.url = item.data.url
+            article.impressions = item.data.ups
+            // article.category = item.data.
+            // article.description = item.data.
+        
+            // push to array
+            state.articles.push(article);
 	  })
       renderArticleListContainer(state, container)
 	})
@@ -199,6 +190,40 @@ function fetchRedditData(){
 }
 
 fetchRedditData();
+
+function clickArticle(event){
+		event.preventDefault()  //stops opening link
+		state.selectedArticle = getArticle(event.delegateTarget.id)
+		renderArticleList(state, container)
+	}
+
+
+
+
+// Mashable fetch, ES6 function style
+function fetchMashableData(){
+ fetch('https://crossorigin.me/http://mashable.com/stories.json')
+ .then((response) => {
+   return response.json()
+ }).then((dataAsJson) => {
+    console.log(dataAsJson);  
+   dataAsJson.new.forEach((item) => {
+     var article = {}
+         article.title =  item.display_title,
+         article.img = item.image,
+         article.url =  item.link,
+         article.impressions =  item.shares.total,
+         article.category =  item.channel,
+         article.description =  item.content.plain
+         state.articles.push(article);
+       })
+       renderContainer(state, container);
+     })  
+}
+
+fetchMashableData();
+
+// Fetch posts - combine by fetching state.newsSources.url ?
 
 
 
