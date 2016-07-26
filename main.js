@@ -23,7 +23,6 @@
             {name: 'newsSource2amy'},
             {test: 'testValue'}       
         ],    // array of article sources
-
         articles : []
   }
 
@@ -39,12 +38,11 @@
 
 
 function renderNavItem(item) {    // returns 
-      // ? needs () around html?
-      return `                   
-        <a href="${item.name}">
-            ${item.name}
-        </a>
-  	   `
+  return `                   
+    <a href="${item.name}">
+      ${item.name}
+    </a>
+    `
 }
 
 /* renderNav function to show nav bar
@@ -82,11 +80,9 @@ function renderNav(state, header) {
 function renderArticleListContainer(state, into) {
   into.innerHTML = `
      <section id="main" class="wrapper">
-     MOO
             ${state.articles.map((article) => {
                 return renderArticle(article)
             }).join('')}
-
     </section>  
   `
 }
@@ -110,8 +106,6 @@ function renderArticle(article) {
       `
     )
   }
-
-
 
 
 
@@ -192,33 +186,33 @@ function fetchRedditData(){
 fetchRedditData();
 
 function clickArticle(event){
-		event.preventDefault()  //stops opening link
-		state.selectedArticle = getArticle(event.delegateTarget.id)
-		renderArticleList(state, container)
-	}
+  event.preventDefault()  //stops opening link
+  state.selectedArticle = getArticle(event.delegateTarget.id)
+  renderArticleList(state, container)
+}
 
 
 
 
 // Mashable fetch, ES6 function style
 function fetchMashableData(){
- fetch('https://crossorigin.me/http://mashable.com/stories.json')
- .then((response) => {
-   return response.json()
- }).then((dataAsJson) => {
-    console.log(dataAsJson);  
-   dataAsJson.new.forEach((item) => {
-     var article = {}
-         article.title =  item.display_title,
-         article.img = item.image,
-         article.url =  item.link,
-         article.impressions =  item.shares.total,
-         article.category =  item.channel,
-         article.description =  item.content.plain
-         state.articles.push(article);
-       })
-       renderContainer(state, container);
-     })  
+  fetch('https://crossorigin.me/http://mashable.com/stories.json')
+    .then((response) => {
+    return response.json()
+   }).then((dataAsJson) => {
+      console.log(dataAsJson);  
+    dataAsJson.new.forEach((item) => {
+      var article = {}
+      article.title =  item.display_title,
+      article.img = item.image,
+      article.url =  item.link,
+      article.impressions =  item.shares.total,
+      article.category =  item.channel,
+      article.description =  item.content.plain
+      state.articles.push(article);
+    })
+      renderContainer(state, container);
+    })  
 }
 
 fetchMashableData();
@@ -230,8 +224,3 @@ fetchMashableData();
 
 // }) closes function for scope and () calls function/page
 })() 
-
-
-
-// Listen for clicks on drop down
-// Fetch data based on what is clicked in drop down
