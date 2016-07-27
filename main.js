@@ -140,24 +140,7 @@ function renderArticle(article) {
 //                                   // and callback is then = state.newsSources.array.url objects?
 
 
-//1. function and 
-// function fetchRedditData(){
-// 	  fetch('https://www.reddit.com/top.json')
-// 	    .then(function(response) {
-// 	      return response.json();
-// 	    }).then(function(dataAsJson) {
-// 	      result.data.children.forEach((item) => {
-// 	        console.log(item)
-// 	  })
-// 	})
-// }
 
-// fetchRedditData();
-
-// var article = []
-//     article.title = item.data.title,
-
-// Cut and put into where console logging:
 
 function fetchRedditData(){
 	  fetch('https://www.reddit.com/top.json')
@@ -217,9 +200,7 @@ function fetchMashableData(){
 
 fetchMashableData();
 
-// Fetch posts - combine by fetching state.newsSources.url ?
-
-
+// Fetch posts - combine by fetching state.newsSources.url 
 
 
 // }) closes function for scope and () calls function/page
