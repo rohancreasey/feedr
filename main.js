@@ -10,34 +10,34 @@
   var container = document.querySelector('#container')  // container div inside body
   var header = document.querySelector('header') // header 
   var state = {
-        newsSources : [
-            {
+       newsSources : [
+	        {
             name: 'Reddit',
             url: 'https://www.reddit.com/top.json'      
-            },
-            {name: 'newsSource1rohan'},
-            {name: 'newsSource2amy'},
-            {test: 'testValue'}
-          ],    // array of article sources
+          },
+          {name: 'newsSource1rohan'},
+          {name: 'newsSource2amy'},
+          {test: 'testValue'}       
+        ],    // array of article sources
   }
 
 
 // renderLoading call for loading pacman
-function renderLoading(data, into) {
-  // TODO: Add the template
-    into.innerHTML = `        
-      <div id="pop-up" class="loader">
-      </div>
+  function renderLoading(data, into) {
+    // TODO: Add the template
+      into.innerHTML = `        
+        <div id="pop-up" class="loader">
+          </div>
       `
-}
+  }
 
 
 function renderNavItem(item) {
-  return `
-    <a href="${item.name}">
-      ${item.name}
-    </a>
-    `
+      return `
+        <a href="${item.name}">
+            ${item.name}
+        </a>
+  	   `
 }
 
 /* renderNav function to show nav bar
@@ -45,25 +45,25 @@ function renderNavItem(item) {
    with results of calling renderSource() on every element in state.newsSources array
 */
 function renderNav(state, into) {
-  into.innerHTML = `
+    into.innerHTML = `
     <section class="wrapper">
       <a href="#"><h1>Feedr</h1></a>
-        <nav>
+      <nav>
         <section id="search">
           <input type="text" name="name" value="">
-            <div id="search-icon"><img src="images/search.png" alt="" /></div>
+          <div id="search-icon"><img src="images/search.png" alt="" /></div>
         </section>
-          <ul>
-            <li><a href="#">News Source: <span>Source Name</span></a>
+        <ul>
+          <li><a href="#">News Source: <span>Source Name</span></a>
           <ul>
             ${state.newsSources.map((item) => {
-              return `<li>${renderNavItem(item)}</li>`
+                return `<li>${renderNavItem(item)}</li>`
             }).join('')}
           </ul>
-            </li>
-          </ul>
-        </nav>
-        <div class="clearfix"></div>
+          </li>
+        </ul>
+      </nav>
+      <div class="clearfix"></div>
     </section>
     `
 }
@@ -72,7 +72,8 @@ function renderNav(state, into) {
 // renderArticleList() to show list of articles, inside #container
 function renderArticleList(state, into) {
   into.innerHTML = `
-    <section id="main" class="wrapper">
+     <section id="main" class="wrapper">
+     MOO
       <article class="article">
         <section class="featured-image">
           <img src="images/article_placeholder_1.jpg" alt="" />
@@ -83,21 +84,8 @@ function renderArticleList(state, into) {
         </section>
         <section class="impressions">
           526
-          </section>
-            <div class="clearfix"></div>
-      </article>
-      <article class="article">
-        <section class="featured-image">
-          <img src="images/article_placeholder_2.jpg" alt="" />
         </section>
-        <section class="article-content">
-          <a href="#"><h3>Test article title</h3></a>
-          <h6>Lifestyle</h6>
-        </section>
-        <section class="impressions">
-          526
-        </section>        
-          <div class="clearfix"></div>
+        <div class="clearfix"></div>
       </article>
       <article class="article">
         <section class="featured-image">
@@ -110,7 +98,20 @@ function renderArticleList(state, into) {
         <section class="impressions">
           526
         </section>
-          <div class="clearfix"></div>
+        <div class="clearfix"></div>
+      </article>
+      <article class="article">
+        <section class="featured-image">
+          <img src="images/article_placeholder_2.jpg" alt="" />
+        </section>
+        <section class="article-content">
+          <a href="#"><h3>Test article title</h3></a>
+          <h6>Lifestyle</h6>
+        </section>
+        <section class="impressions">
+          526
+        </section>
+        <div class="clearfix"></div>
       </article>
       <article class="article">
         <section class="featured-image">
@@ -123,10 +124,10 @@ function renderArticleList(state, into) {
         <section class="impressions">
           526
         </section>
-      <div class="clearfix"></div>
+        <div class="clearfix"></div>
       </article>
     </section>  
-	`
+  `
 }
 
 
@@ -144,16 +145,16 @@ function renderArticleList(state, into) {
 //       //state.newsSources.push[0]
 //     })
 
-// TODO - create a function for fetch action as want to repeat it for additional APIs
+// create a function for fetch action as want to repeat it
 
-function fetchPosts(callback) {
-    fetch(callback.url) // fetch .url object of callback parameter
-        .then(function(response) {
-            return response.json()
-        }).then(function(dataAsJson) {
-            console.log(dataAsJson);
-        })
-}
+function fetchPosts(callback){
+		fetch(callback.url)   // fetch .url object of callback parameter
+      .then(function(response) {
+			  return response.json()
+		}).then(function(dataAsJson) {
+			  console.log(dataAsJson);
+		})
+	}
 
 fetchPosts(state.newsSources[]); // argument becomes the parameter callback in line 150
                                   // so should reference newsSources array
