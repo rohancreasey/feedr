@@ -23,7 +23,8 @@
             {name: 'newsSource2amy'},
             {test: 'testValue'}       
         ],    // array of article sources
-        articles : []
+        articles : [],
+        selectedArticle : []
   }
 
 
@@ -90,6 +91,7 @@ function renderArticleListContainer(state, into) {
 
 function renderArticle(article) {
     return(`
+    MOO
         <article class="article">
         <section class="featured-image">
           <img src="${article.img}" alt="" target="_blank" />
@@ -177,30 +179,45 @@ function clickArticle(event){
 
 
 
-// Mashable fetch, ES6 function style
-function fetchMashableData(){
-  fetch('https://crossorigin.me/http://mashable.com/stories.json')
-    .then((response) => {
-    return response.json()
-   }).then((dataAsJson) => {
-      console.log(dataAsJson);  
-    dataAsJson.new.forEach((item) => {
-      var article = {}
-      article.title =  item.display_title,
-      article.img = item.image,
-      article.url =  item.link,
-      article.impressions =  item.shares.total,
-      article.category =  item.channel,
-      article.description =  item.content.plain
-      state.articles.push(article);
-    })
-      renderContainer(state, container);
-    })  
-}
+// // Mashable fetch, ES6 function style
+// function fetchMashableData(){
+//   fetch('https://crossorigin.me/http://mashable.com/stories.json')
+//     .then((response) => {
+//     return response.json()
+//    }).then((dataAsJson) => {
+//       console.log(dataAsJson);  
+//     dataAsJson.new.forEach((item) => {
+//       var article = {}
+//       article.title =  item.display_title,
+//       article.img = item.image,
+//       article.url =  item.link,
+//       article.impressions =  item.shares.total,
+//       article.category =  item.channel,
+//       article.description =  item.content.plain
+//       state.articles.push(article);
+//     })
+//       renderContainer(state, container);
+//     })  
+// }
 
-fetchMashableData();
+// fetchMashableData();
 
 // Fetch posts - combine by fetching state.newsSources.url 
+
+
+delegate('#container', 'click','.article', (event) => {    // delegate container to listen for clicks on article class
+    event.preventDefault();  //stops opening link
+    console.log('article clicked');
+    // var clickedArticle = event.delegateTarget.value;    //assign article name to var
+    // state.selectedArticle = clickedArticle    // set article name in state
+    // console.log(state.selectedArticle);
+
+})
+
+function renderPopUp() {
+
+}
+
 
 
 // }) closes function for scope and () calls function/page
